@@ -1,0 +1,53 @@
+{
+  "name": "clash-balancer",
+  "version": "0.1.0",
+  "description": "通过编排 mihomo / Clash.Meta 实现自动代理负载均衡:客户端连固定端口,轮询分发到多个上游代理",
+  "type": "commonjs",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "clean": "node -e \"require('node:fs').rmSync('dist',{recursive:true,force:true})\"",
+    "typecheck": "tsc --noEmit",
+    "test": "node --import tsx --test \"test/**/*.test.ts\"",
+    "example": "tsx examples/basic.ts",
+    "prepublishOnly": "pnpm run build"
+  },
+  "keywords": [
+    "clash",
+    "mihomo",
+    "proxy",
+    "load-balance",
+    "load-balancer",
+    "proxy-pool"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "js-yaml": "^4.1.0"
+  },
+  "devDependencies": {
+    "@types/js-yaml": "^4.0.9",
+    "@types/node": "^24.0.0",
+    "tsup": "^8.3.5",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  },
+  "volta": {
+    "node": "24.15.0"
+  }
+}

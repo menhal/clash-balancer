@@ -1,0 +1,17 @@
+node_modules/
+*.log
+.DS_Store
+
+# 构建产物
+dist/
+
+# mihomo 运行时工作目录 / 生成的配置
+.clash-runtime/
+*.runtime.yaml
+
+# 本地二进制与密钥
+bin/
+*.exe
+.env
+.env.local
+.idea
