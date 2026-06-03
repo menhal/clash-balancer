@@ -1,6 +1,6 @@
 {
   "name": "clash-balancer",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "通过编排 mihomo / Clash.Meta 实现自动代理负载均衡:客户端连固定端口,轮询分发到多个上游代理",
   "type": "commonjs",
   "main": "dist/index.js",
