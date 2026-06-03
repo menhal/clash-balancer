@@ -24,16 +24,35 @@
 ## 前置条件
 
 - **Node.js ≥ 18**(需内置 `fetch`)。
-- **一个 mihomo / Clash.Meta 可执行文件**。两种提供方式:
-  - 放到本包的 `bin/` 目录下(如 `bin/mihomo-windows-amd64-compatible.exe`),库会**自动发现**,调用时无需传 `binPath`;
-  - 或调用时通过 `binPath` 显式指定路径。
-  > `bin/` 默认不随仓库/npm 分发,请自行下载对应平台的二进制放入,或用 `binPath`。
+- **一个 mihomo / Clash.Meta 可执行文件**。安装本包时会**自动按当前平台从 GitHub Releases 下载**
+  对应的 mihomo 二进制到包内 `bin/`,库运行时会**自动发现**,通常无需传 `binPath`。
+  - 自动下载失败也**不会中断安装**(只打警告);此时可手动下载放入 `bin/`,或调用时显式传 `binPath`。
+  - 二进制**不随 npm 包分发**(包仅几十 KB),始终是装包时按平台现取。
 
 ## 安装
 
 ```bash
 pnpm install   # 或 npm install / yarn
 ```
+
+> **pnpm 用户注意**:pnpm v9+ 默认**拦截依赖的 `postinstall` 脚本**,自动下载不会执行。
+> 需要在你的项目里允许本包构建:
+> ```bash
+> pnpm approve-builds        # 交互式批准,或:
+> ```
+> 或在 `package.json` 配 `"pnpm": { "onlyBuiltDependencies": ["clash-balancer"] }`。
+> 不想走自动下载时,直接给 `binPath` 即可,无需开启。
+
+### 自动下载的环境变量(可选)
+
+| 变量 | 作用 |
+|---|---|
+| `MIHOMO_VERSION` | 指定 mihomo 版本(如 `v1.19.26`);默认取 latest release |
+| `MIHOMO_MIRROR` | GitHub 下载镜像前缀(国内加速),拼在 `github.com` 链接前,如 `https://ghproxy.example/` |
+| `MIHOMO_DOWNLOAD_URL` | 直接指定二进制资源 URL(优先级最高,跳过 GitHub API) |
+| `MIHOMO_FORCE=1` | 即使 `bin/` 已有二进制也重新下载 |
+| `CLASH_BALANCER_SKIP_DOWNLOAD=1` | 跳过自动下载(改为手动 / `binPath`) |
+| `GITHUB_TOKEN` | 提高 GitHub API 速率限制(可选) |
 
 ```ts
 // ESM / TypeScript

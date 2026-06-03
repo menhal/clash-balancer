@@ -14,7 +14,8 @@
     }
   },
   "files": [
-    "dist"
+    "dist",
+    "scripts/download-mihomo.cjs"
   ],
   "scripts": {
     "build": "tsup",
@@ -23,6 +24,7 @@
     "typecheck": "tsc --noEmit",
     "test": "node --import tsx --test \"test/**/*.test.ts\"",
     "example": "tsx examples/basic.ts",
+    "postinstall": "node scripts/download-mihomo.cjs",
     "prepublishOnly": "pnpm run build"
   },
   "keywords": [
